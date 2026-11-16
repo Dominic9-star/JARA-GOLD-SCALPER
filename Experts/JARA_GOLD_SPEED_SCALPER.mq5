@@ -79,10 +79,6 @@ bool SessionAllowed()
 }
 
 bool HasOurPosition()
-{
-   for(int i = PositionsTotal()-1; i >= 0; i--)
-   {
-      ulong ticket = PositionGetTicket(i);
       if(ticket == 0) continue;
 
       if(PositionGetString(POSITION_SYMBOL) == _Symbol &&
@@ -109,8 +105,9 @@ void ManagePositions()
 
       if(TimeCurrent() - opened >= MaxHoldingSeconds)
          trade.PositionClose(ticket);
-   }
-}void OnTick()
+}
+
+void OnTick()
 {
    ManagePositions();
    ResetDailyLimits();
