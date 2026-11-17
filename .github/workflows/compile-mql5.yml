@@ -1,0 +1,33 @@
+name: JARA MQL5 Cloud Compiler
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Experts/JARA_GOLD_SPEED_SCALPER_v1.mq5'
+      - '.github/workflows/compile-mql5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v6
+
+      - name: Compile MQL5
+        uses: psyb0t/docker-mql-compiler@master
+        with:
+          paths: Experts/JARA_GOLD_SPEED_SCALPER_v1.mq5
+
+      - name: Upload compiled EX5
+        uses: actions/upload-artifact@v4
+        with:
+          name: JARA-GOLD-SCALPER-EX5
+          path: Experts/JARA_GOLD_SPEED_SCALPER_v1.ex5
+          if-no-files-found: error
+          retention-days: 7
