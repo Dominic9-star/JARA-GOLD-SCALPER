@@ -151,5 +151,3 @@ void OnDeinit(const int reason)
    IndicatorRelease(slowHandle);
    IndicatorRelease(rsiHandle);
 }
-
-0
